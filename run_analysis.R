@@ -7,14 +7,14 @@ library(tidyr)
 library(dplyr)
 library(data.table)
 
-## set working directory to the root of where your data set resides
-setwd("/Volumes/Kingston/DropBox/Coursera/3 Data Cleaning/Project/")
+## set working directory to the root of where your data set resides; commented out, because the submission
+## instructions said to assume that "that can be run as long as the Samsung data is in your working directory."
+#setwd("/Volumes/Kingston/DropBox/Coursera/3 Data Cleaning/Project/UCI HAR Dataset/")
 
 ## Read in descriptive, relational information that is constant over both the test and the training sets
-base_path <- "UCI HAR Dataset/"
-dt.activities <- data.table(read.csv(paste0(base_path, "activity_labels.txt"), 
+dt.activities <- data.table(read.csv(paste0("activity_labels.txt"), 
                                    sep = " ", header = FALSE, col.names = c("activity", "activity_name")))
-dt.features <- data.table(read.csv(paste0(base_path, "features.txt"),
+dt.features <- data.table(read.csv(paste0("features.txt"),
                                   sep = " ", header = FALSE, col.names = c("feature", "measurement_type")))
 dt.features[, measurement_type := as.character(measurement_type)]
 ## Point 2: We will only want the measurements coded as "mean", "Mean" and "std" for mean and stardard deviation
@@ -38,11 +38,11 @@ dt.features[, measurement_type := gsub("_$|^_", "", measurement_type)]
 ## Point 1: Merges test and training data sets. Load from the working directory
 forms <- c("test", "train")
 dt.data <- do.call(rbind, lapply(forms, function(form){
-    dt.subject <- data.table(read.table(file = paste0(base_path, form, "/subject_", form, ".txt"), header = FALSE,
+    dt.subject <- data.table(read.table(file = paste0(form, "/subject_", form, ".txt"), header = FALSE,
                                         col.names = "subject"))
-    dt.activity <- data.table(read.table(file = paste0(base_path, form, "/y_", form, ".txt"), header = FALSE,
+    dt.activity <- data.table(read.table(file = paste0(form, "/y_", form, ".txt"), header = FALSE,
                                          col.names = "activity"))
-    dt.measurement <- data.table(read.table(file = paste0(base_path, form, "/X_", form, ".txt"), header = FALSE))
+    dt.measurement <- data.table(read.table(file = paste0(form, "/X_", form, ".txt"), header = FALSE))
     ## link data elements together
     dt.full <- cbind(dt.subject, dt.activity, dt.measurement)
     ## keep track as to whether was test or training data
