@@ -7,7 +7,7 @@ This file describes the data (in table form) found in tidy_data.csv and tidy_dat
 1. *subject*: a number between 1 and 30 indicating a specific volunteer (with no other identifying characteristics) who generated the data
 2. *activity_name*: an english-language description of what they were doing when they generated the data.  This is equivalent of an ENUM field, with six available levels: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, and LAYING
 3. *measurement_type*: more information below, but at high level, it is a summary of very specific kind of information about the subject's movements while doing the different activities.  This is derived from the information in "feature.txt" in the original data set.
-4. *value*: the specific measurements or further summarization (as described below in the tidy_data_summary.csv section).  As noted in the original documentation, the values are normalized between -1 and 1.
+4. *value*: the specific measurements or further summarization (as described below in the tidy_data_summary.csv section).  As noted in the original documentation, the values are normalized between -1 and 1 and are therefore unitless.
 
 # tidy_data.csv Details
 
